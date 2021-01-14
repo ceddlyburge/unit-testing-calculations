@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 @dataclass
 # This class contains a fictional list of rows in a cash flow calculation 
-# for a wind farm, only the properties used in the calculated below are 
+# for a wind farm, only the properties used in the calculation below are 
 # present, but in reality there would be many more
 class CashFlowStep:
     start_of_step: datetime
@@ -75,7 +75,7 @@ class ConstructionMarginCashFlowCostCalculator:
                 step.balance_of_plant_cost_including_margin *= (1 + self.epc_margin)
 
     def calculate_inflation(self, start_of_step: datetime) -> float:
-        # return 1 for the sake of the example, but in reality the calculation involves
+        # return 1 for the sake of the example, but in reality the calculation would need
         # self.date_of_financial_close, self.inflation_rate and self.inflation_mode
         return 1
 
@@ -83,12 +83,12 @@ class ConstructionMarginCashFlowCostCalculator:
 # many tests, that all test a permutation of the input values, and the names
 # would reflect the input values and expected output.
 # The function has 3 if statements, which means that there are  2^3, or 8 different paths
-# through the code. In reality the calculate_inflation function also has 4 paths through 
+# through the code. In reality the calculate_inflation function would need 4 paths through 
 # it, which leads to 2^7 paths in total.
 # There is also the for loop, which should probably be tested for at least 3 different 
 # lengths of list, which is another 2 code paths, for 2^9
-# It is obviously not feasible to test this, hence the need to find ways to make it
-# easier
+# It is obviously not feasible (or useful) to test this, hence the need to find ways to 
+# make it easier
 def test_calculate_steps_sets_correct_values():
     balance_of_plant_costs_at_financial_close = 10
     development_cost = 11
@@ -126,69 +126,3 @@ def test_calculate_steps_sets_correct_values():
     assert cash_flow_step.balance_of_plant_cost_including_margin == 3.3000000000000003
     assert cash_flow_step.construction_profit == -0.66
 
-
-
-
-# public ConstructionMarginCashFlowCostCalculator(
-#  double balanceOfPlantCostsAtFinancialClose, 
-#  double developmentCost, 
-#  double turbineCosts, 
-#  double specialCapitalCosts, 
-#  DateTime dateOfFinancialClose, 
-#  bool inSellingMode, 
-#  double epcMargin,
-#  double inflationRate,
-#  InflationMode inflationMode)
-# {
-#  this.balanceOfPlantCostsAtFinancialClose = balanceOfPlantCostsAtFinancialClose;
-#  this.developmentCost = developmentCost;
-#  this.turbineCosts = turbineCosts;
-#  this.specialCapitalCosts = specialCapitalCosts;
-#  this.dateOfFinancialClose = dateOfFinancialClose;
-#  this.inSellingMode = inSellingMode;
-#  this.epcMargin = epcMargin;
-#  this.inflationRate = inflationRate;
-#  this.inflationMode = inflationMode;
-# }
-
-# public void CalculateSteps(
-#  IEnumerable<CashFlowSteps> steps, 
-#  double fractionOfSpend)
-# {
-#  foreach (var step in Steps)
-#  {
-#   double inflation = CalculateInflation(
-#    dateOfFinancialClose, 
-#    step.StartOfStep, 
-#    inflationRate, 
-#    inflationMode);
- 
-#   if (step.StartOfStep == dateOfFinancialClose)
-#   {
-#    step.SpecialCapitalCosts = specialCapitalCosts;
-
-#    if (inSellingMode == false)
-#     step.DevelopmentCostIfOwning = developmentCost;
-
-#    step.DevelopmentCost = developmentCost;
-#   }
-
-#   step.TurbineCostIncludingMargin = 
-#    turbineCosts * inflation * fractionOfSpend;
-  
-#   step.BalanceOfPlantCostIncludingMargin = 
-#    balanceOfPlantCostsAtFinancialClose * inflation * fractionOfSpend;
-
-#   if (inSellingMode) 
-#   {
-#    step.ConstructionProfit = 
-#     -1 * 
-#     (step.TurbineCostIncludingMargin + step.BalanceOfPlantCostIncludingMargin) * 
-#     epcMargin;
-   
-#    step.TurbineCostIncludingMargin *= (1 + epcMargin);
-   
-#    step.BalanceOfPlantCostIncludingMargin *= (1 + epcMargin);
-#   }
-#  }
-# }
