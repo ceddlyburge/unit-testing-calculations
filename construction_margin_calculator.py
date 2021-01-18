@@ -86,7 +86,7 @@ class ConstructionMarginCashFlowCostCalculator:
 # through the code. In reality the calculate_inflation function would need 4 paths through 
 # it, which leads to 2^7 paths in total.
 # There is also the for loop, which should probably be tested for at least 3 different 
-# lengths of list, which is another 2 code paths, for 2^9
+# lengths of list, which is another 2 code paths, for 2^9 (512).
 # It is obviously not feasible (or useful) to test this, hence the need to find ways to 
 # make it easier
 def test_calculate_steps_sets_correct_values():
@@ -99,6 +99,7 @@ def test_calculate_steps_sets_correct_values():
     epc_margin = 0.1
     inflation_rate = 1.1
     inflation_mode = 2
+    fraction_of_spend = 0.3
 
     sut = ConstructionMarginCashFlowCostCalculator(
         balance_of_plant_costs_at_financial_close, 
@@ -112,7 +113,6 @@ def test_calculate_steps_sets_correct_values():
         inflation_mode
     )
 
-    fraction_of_spend = 0.3
     cash_flow_step = CashFlowStep(date_of_financial_close, None, None, None, None, None, None, None)
 
     sut.calculate_steps([cash_flow_step], fraction_of_spend)

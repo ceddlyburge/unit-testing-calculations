@@ -67,44 +67,49 @@ class ConstructionMarginCashFlowCostCalculator:
             
             step.balance_of_plant_cost_including_margin *= (1 + self.epc_margin)
 
+any_double = 5.55555
 
-# Using a mock for the inflation removes the 4 code paths through the inflation code, 
-# so with the removal of the loop, the function now has 2^3 (8) paths in total, much
-# less that the initial 2^9 (512)!
-# It is also easier to test everything, as the inflation is a separate and simple
-# calculation
-def test_calculate_step_sets_correct_values():
+# Manipulating the conditionals so that most of them are false allows us to test
+# small parts of the function in isolation, which makes the tests a lot simpler,
+# and makes it feasible to include the calculation in the test, and to give the
+# test a better name.
+# There should obvioulsy be more tests like this, but only one is shown for 
+# simplicity.
+def test_calculates_turbine_cost_including_margin_correctly():
+    not_in_selling_mode = False
+    turbine_costs = 12
+    fraction_of_spend = 0.3
+    inflation = 2
+    date_of_financial_close = datetime(2020, 1, 1)
+    not_date_of_financial_close = datetime(2020, 1, 2)
+
     balance_of_plant_costs_at_financial_close = 10
     development_cost = 11
-    turbine_costs = 12
     special_capital_costs = 13
-    date_of_financial_close = datetime(2020, 1, 1)
-    in_selling_mode = True
     epc_margin = 0.1
-    inflation = 1
-    fraction_of_spend = 0.3
+    inflation_rate = 1.1
+    inflation_mode = 2
 
     sut = ConstructionMarginCashFlowCostCalculator(
-        balance_of_plant_costs_at_financial_close, 
-        development_cost, 
+        any_double, 
+        any_double, 
         turbine_costs, 
-        special_capital_costs, 
+        any_double, 
         date_of_financial_close, 
-        in_selling_mode, 
-        epc_margin, 
-        MockInflation(inflation)
+        not_in_selling_mode, 
+        any_double, 
+        MockInflation(inflation), 
     )
 
-    cash_flow_step = CashFlowStep(date_of_financial_close, None, None, None, None, None, None, None)
+    cash_flow_step = CashFlowStep(not_date_of_financial_close, None, None, None, None, None, None, None)
 
     sut.calculate_step(cash_flow_step, fraction_of_spend)
 
-    assert cash_flow_step.special_capital_costs == 13
-    assert cash_flow_step.development_cost_if_owning == None
-    assert cash_flow_step.development_cost == 11
-    assert cash_flow_step.turbine_cost_including_margin == 3.96
-    assert cash_flow_step.balance_of_plant_cost_including_margin == 3.3000000000000003
-    assert cash_flow_step.construction_profit == -0.66
+    # It is now simple to include the calculation in the test, so no
+    # the test clearly communicates that the turbine_cost_including_margin
+    # should be the turbine_costs * fraction_of_spend * inflation
+    assert cash_flow_step.turbine_cost_including_margin == turbine_costs * fraction_of_spend * inflation
+
 
 class MockInflation:
     def __init__(self, constant_inflation):
@@ -112,6 +117,5 @@ class MockInflation:
 
     def inflation_to(self, when: datetime):
         return self._constant_inflation
-
 
 # The code and test for the CashFlowStepsCalculator is no longer shown
