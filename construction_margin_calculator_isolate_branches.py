@@ -73,25 +73,22 @@ any_double = 5.55555
 # small parts of the function in isolation, which makes the tests a lot simpler,
 # and makes it feasible to include the calculation in the test, and to give the
 # test a better name.
+# The test is now more expressive and  clearly communicates how the calculations 
+# should be performed (for example, that the turbine_cost_including_margin should
+# be the turbine_costs * fraction_of_spend * inflation)
 # There should obvioulsy be more tests like this, but only one is shown for 
 # simplicity.
 def test_calculates_turbine_cost_including_margin_correctly():
     not_in_selling_mode = False
     turbine_costs = 12
+    balance_of_plant_costs_at_financial_close = 10
     fraction_of_spend = 0.3
     inflation = 2
     date_of_financial_close = datetime(2020, 1, 1)
     not_date_of_financial_close = datetime(2020, 1, 2)
 
-    balance_of_plant_costs_at_financial_close = 10
-    development_cost = 11
-    special_capital_costs = 13
-    epc_margin = 0.1
-    inflation_rate = 1.1
-    inflation_mode = 2
-
     sut = ConstructionMarginCashFlowCostCalculator(
-        any_double, 
+        balance_of_plant_costs_at_financial_close, 
         any_double, 
         turbine_costs, 
         any_double, 
@@ -105,10 +102,8 @@ def test_calculates_turbine_cost_including_margin_correctly():
 
     sut.calculate_step(cash_flow_step, fraction_of_spend)
 
-    # It is now simple to include the calculation in the test, so no
-    # the test clearly communicates that the turbine_cost_including_margin
-    # should be the turbine_costs * fraction_of_spend * inflation
     assert cash_flow_step.turbine_cost_including_margin == turbine_costs * fraction_of_spend * inflation
+    assert cash_flow_step.balance_of_plant_cost_including_margin == balance_of_plant_costs_at_financial_close * inflation * fraction_of_spend
 
 
 class MockInflation:
