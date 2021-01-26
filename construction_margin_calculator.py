@@ -117,8 +117,6 @@ def test_calculate_steps_sets_correct_values():
 
     sut.calculate_steps([cash_flow_step], fraction_of_spend)
 
-    print(cash_flow_step)
-
     assert cash_flow_step.special_capital_costs == 13
     assert cash_flow_step.development_cost_if_owning == None
     assert cash_flow_step.development_cost == 11
