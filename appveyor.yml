@@ -4,7 +4,7 @@ environment:
 
 install:
   - pip install tox
-  - set PYTHONPATH=C:\projects\docs-from-tests-example
+  - set PYTHONPATH=C:\projects\unit-testing-calculations
 
 build: off
 
