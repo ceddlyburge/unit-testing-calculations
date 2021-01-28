@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import List
 from dataclasses import dataclass
 from cash_flow_calculator.cash_flow_step import CashFlowStep
-from cash_flow_calculator.construction_margin_cash_flow_cost_calculator import ConstructionMarginCashFlowCostCalculator
+from cash_flow_calculator.construction_margin_calculator import ConstructionMarginCalculator
 
 # This test, and its name are bad, as it is testing everything. In reality there should be
 # many tests, that all test a permutation of the input values, and the names
@@ -26,7 +26,7 @@ def test_calculate_steps_sets_correct_values():
     inflation_mode = 2
     fraction_of_spend = 0.3
 
-    sut = ConstructionMarginCashFlowCostCalculator(
+    sut = ConstructionMarginCalculator(
         balance_of_plant_costs_at_financial_close, 
         development_cost, 
         turbine_costs, 
