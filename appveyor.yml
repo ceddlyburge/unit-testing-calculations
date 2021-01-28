@@ -1,0 +1,27 @@
+environment:
+  matrix:
+  - TOXENV: py37
+
+install:
+  - pip install tox
+  - set PYTHONPATH=C:\projects\docs-from-tests-example
+
+build: off
+
+test_script:
+  - tox
+
+on_finish:
+  # the below is a nicety, it populates the "tests" tab of the appveyor build page,
+  # it requires "--junitxml=test-output.xml" to be added to the pytest command
+  - ps: ./tests/upload_test_results_to_appveyor.ps1
+
+# the below means that normally only the person that broke the build gets an email, instead of everybody
+notifications:
+  - provider: Email
+    to:
+      - '{{commitAuthorEmail}}'
+    subject: 'Build {{status}}'
+    on_build_success: false
+    on_build_failure: true
+    on_build_status_changed: false
