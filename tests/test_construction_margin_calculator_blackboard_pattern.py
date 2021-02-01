@@ -1,7 +1,12 @@
 from tests.construction_margin_calculator_blackboard_pattern_builder import ConstructionMarginCalculatorBlackboardPatternBuilder
 from tests.cash_flow_step_builder import CashFlowStepBuilder
 
-# add some text here
+# Now that we are using the blackboard pattern, the entire calculation for 
+# construction_profit can be included in the test quite easily, and without
+# making it too complicated.
+# This is because we have broken the dependency between the construction_profit
+# calculation and the balance_of_plant_cost_including_margin and 
+# turbine_cost_including_margin calculations (by using the blackboard pattern)
 # There should obvioulsy be more tests like this, but only one is shown for 
 # simplicity. 
 def test_construction_profit_calculated_correctly():
@@ -28,8 +33,6 @@ def test_construction_profit_calculated_correctly():
         epc_margin
 
 
-# The test for the CashFlowStepsCalculator is no longer shown
-
 # The test for the blackboard / CashFlowStep orchestrator is
 # (CashFlowStepCalculator) is also not shown. It's quite simple
 # so hopefully its easy to imagine what the test would look like.
@@ -40,3 +43,5 @@ def test_construction_profit_calculated_correctly():
 # orchestrator which only ever needs testing once, and if it
 # arrives in a python package will already have been tested by
 # its creator.
+
+# The test for the CashFlowStepsCalculator is no longer shown

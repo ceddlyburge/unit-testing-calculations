@@ -46,7 +46,7 @@ def test_calculate_step_sets_correct_values():
 
 # This code tests the CashFlowStepsCalculator, which is arguably unecessary, being as it
 # is so simple. There is more code here than in the original solution, but it does remove
-# 400 potential paths through the code, so hopefully the benefit is clear.
+# ~400 potential paths through the code, so hopefully the benefit is clear.
 class MockSpecialCapitalCostAsFractionOfSpendCalculator:
     def calculate_step(self, step: CashFlowStep, fraction_of_spend: float):
         step.special_capital_costs = fraction_of_spend

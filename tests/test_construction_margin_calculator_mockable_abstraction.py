@@ -41,4 +41,4 @@ def test_calculate_step_sets_correct_values():
     assert cash_flow_step.balance_of_plant_cost_including_margin == 3.3000000000000003
     assert cash_flow_step.construction_profit == -0.66
 
-# The code and test for the CashFlowStepsCalculator is no longer shown
+# The test for the CashFlowStepsCalculator is no longer shown

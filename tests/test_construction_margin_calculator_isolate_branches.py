@@ -42,4 +42,4 @@ def test_calculates_turbine_cost_including_margin_correctly():
     assert cash_flow_step.balance_of_plant_cost_including_margin == balance_of_plant_costs_at_financial_close * inflation * fraction_of_spend
 
 
-# The code and test for the CashFlowStepsCalculator is no longer shown
+# The test for the CashFlowStepsCalculator is no longer shown

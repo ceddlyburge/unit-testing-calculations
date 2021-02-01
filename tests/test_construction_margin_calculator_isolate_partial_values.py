@@ -32,4 +32,4 @@ def test_construction_profit_includes_turbine_costs():
     assert cash_flow_step.construction_profit == -1 * turbine_costs * inflation * fraction_of_spend * epc_margin
 
 
-# The code and test for the CashFlowStepsCalculator is no longer shown
+# The test for the CashFlowStepsCalculator is no longer shown
