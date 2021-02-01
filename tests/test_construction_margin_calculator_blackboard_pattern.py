@@ -1,25 +1,17 @@
-from datetime import datetime
 from cash_flow_calculator.cash_flow_step import CashFlowStep
-from cash_flow_calculator.construction_margin_calculator_blackboard_pattern import ConstructionMarginCalculatorBlackboardPattern
-from tests.mock_inflation import MockInflation
+from tests.construction_margin_calculator_blackboard_pattern_builder import ConstructionMarginCalculatorBlackboardPatternBuilder
 from tests.cash_flow_step_builder import CashFlowStepBuilder
 
-# The full calculation for `construction_profit` is quite long and complicated,
-# but we can simplify by setting some "additive" properties to 0, and some 
-# "multiplicative" properties to 1, so that they don't effect the result.
-# This test sets balance_of_plant_costs_at_financial_close to 0, so that we can
-# concentrate on the turbine_costs. This again means that the test code is
-# simpler than the system under test, which helps with "tests as documentation"
-# and the "Obscure Test" smell.
+# add some text here
 # There should obvioulsy be more tests like this, but only one is shown for 
 # simplicity. 
-def test_construction_profit_includes_turbine_costs():
+def test_construction_profit_calculated_correctly():
     turbine_cost_including_margin = 10
     balance_of_plant_cost_including_margin = 11
     fraction_of_spend = 0.3
     epc_margin = 0.1
 
-    sut = ConstructionMarginCashFlowCostCalculatorBuilder() \
+    sut = ConstructionMarginCalculatorBlackboardPatternBuilder() \
         .with_epc_margin(epc_margin) \
         .in_selling_mode() \
         .build()
@@ -35,31 +27,6 @@ def test_construction_profit_includes_turbine_costs():
         -1 * \
         (turbine_cost_including_margin + balance_of_plant_cost_including_margin) * \
         epc_margin
-
-
-any_double = 5.55555
-
-class ConstructionMarginCashFlowCostCalculatorBuilder:
-
-    def __init__(self): 
-        self._sut = ConstructionMarginCalculatorBlackboardPattern(
-            development_cost=any_double, 
-            special_capital_costs=any_double, 
-            date_of_financial_close=None, 
-            in_selling_mode=None, 
-            epc_margin=any_double
-        )
-
-    def with_epc_margin(self, epc_margin: float): 
-        self._sut.epc_margin = epc_margin
-        return self
-
-    def in_selling_mode(self): 
-        self._sut.in_selling_mode = True
-        return self
-
-    def build(self):
-        return self._sut
 
 
 # The test for the CashFlowStepsCalculator is no longer shown
