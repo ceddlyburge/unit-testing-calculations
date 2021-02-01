@@ -1,7 +1,7 @@
 from datetime import datetime
 from cash_flow_calculator.cash_flow_step import CashFlowStep
 from cash_flow_calculator.construction_margin_calculator_mockable_abstraction import ConstructionMarginCalculatorMockableAbstraction
-
+from tests.mock_inflation import MockInflation
 
 # Using a mock for the inflation removes the 4 code paths through the inflation code, 
 # so with the removal of the loop, the function now has 2^3 (8) paths in total, much
@@ -40,13 +40,5 @@ def test_calculate_step_sets_correct_values():
     assert cash_flow_step.turbine_cost_including_margin == 3.96
     assert cash_flow_step.balance_of_plant_cost_including_margin == 3.3000000000000003
     assert cash_flow_step.construction_profit == -0.66
-
-class MockInflation:
-    def __init__(self, constant_inflation):
-        self._constant_inflation = constant_inflation
-
-    def inflation_to(self, when: datetime):
-        return self._constant_inflation
-
 
 # The code and test for the CashFlowStepsCalculator is no longer shown

@@ -1,6 +1,7 @@
 from datetime import datetime
 from cash_flow_calculator.cash_flow_step import CashFlowStep
 from cash_flow_calculator.construction_margin_calculator_mockable_abstraction import ConstructionMarginCalculatorMockableAbstraction
+from tests.mock_inflation import MockInflation
 
 any_double = 5.55555
 
@@ -40,12 +41,5 @@ def test_calculates_turbine_cost_including_margin_correctly():
     assert cash_flow_step.turbine_cost_including_margin == turbine_costs * fraction_of_spend * inflation
     assert cash_flow_step.balance_of_plant_cost_including_margin == balance_of_plant_costs_at_financial_close * inflation * fraction_of_spend
 
-
-class MockInflation:
-    def __init__(self, constant_inflation):
-        self._constant_inflation = constant_inflation
-
-    def inflation_to(self, when: datetime):
-        return self._constant_inflation
 
 # The code and test for the CashFlowStepsCalculator is no longer shown

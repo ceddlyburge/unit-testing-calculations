@@ -1,6 +1,7 @@
 from datetime import datetime
 from cash_flow_calculator.cash_flow_step import CashFlowStep
 from cash_flow_calculator.construction_margin_calculator_blackboard_pattern import ConstructionMarginCalculatorBlackboardPattern
+from tests.mock_inflation import MockInflation
 
 # The full calculation for `construction_profit` is quite long and complicated,
 # but we can simplify by setting some "additive" properties to 0, and some 
@@ -77,14 +78,8 @@ class CashFlowStepBuilder:
         return self._sut
 
 
-class MockInflation:
-    def __init__(self, constant_inflation):
-        self._constant_inflation = constant_inflation
-
-    def inflation_to(self, when: datetime):
-        return self._constant_inflation
-
 # The test for the CashFlowStepsCalculator is no longer shown
+
 # The test for the blackboard / CashFlowStep orchestrator is
 # (CashFlowStepCalculator) is also not shown. It's quite simple
 # so hopefully its easy to imagine what the test would look like.

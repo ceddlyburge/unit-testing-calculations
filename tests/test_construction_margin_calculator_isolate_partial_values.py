@@ -1,6 +1,7 @@
 from datetime import datetime
 from cash_flow_calculator.cash_flow_step import CashFlowStep
 from cash_flow_calculator.construction_margin_calculator_mockable_abstraction import ConstructionMarginCalculatorMockableAbstraction
+from tests.mock_inflation import MockInflation
 
 # The full calculation for `construction_profit` is quite long and complicated,
 # but we can simplify by setting some "additive" properties to 0, and some 
@@ -81,12 +82,5 @@ class CashFlowStepBuilder:
     def build(self):
         return self._cash_flow_step
 
-
-class MockInflation:
-    def __init__(self, constant_inflation):
-        self._constant_inflation = constant_inflation
-
-    def inflation_to(self, when: datetime):
-        return self._constant_inflation
 
 # The code and test for the CashFlowStepsCalculator is no longer shown
