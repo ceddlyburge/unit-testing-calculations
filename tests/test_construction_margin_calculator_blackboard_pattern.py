@@ -2,6 +2,7 @@ from datetime import datetime
 from cash_flow_calculator.cash_flow_step import CashFlowStep
 from cash_flow_calculator.construction_margin_calculator_blackboard_pattern import ConstructionMarginCalculatorBlackboardPattern
 from tests.mock_inflation import MockInflation
+from tests.cash_flow_step_builder import CashFlowStepBuilder
 
 # The full calculation for `construction_profit` is quite long and complicated,
 # but we can simplify by setting some "additive" properties to 0, and some 
@@ -55,23 +56,6 @@ class ConstructionMarginCashFlowCostCalculatorBuilder:
 
     def in_selling_mode(self): 
         self._sut.in_selling_mode = True
-        return self
-
-    def build(self):
-        return self._sut
-
-
-class CashFlowStepBuilder:
-
-    def __init__(self): 
-        self._sut = CashFlowStep(None, None, None, None, None, None, None, None)
-
-    def with_turbine_cost_including_margin(self, turbine_cost_including_margin: float): 
-        self._sut.turbine_cost_including_margin = turbine_cost_including_margin
-        return self
-    
-    def with_balance_of_plant_cost_including_margin(self, balance_of_plant_cost_including_margin: float): 
-        self._sut.balance_of_plant_cost_including_margin = balance_of_plant_cost_including_margin
         return self
 
     def build(self):

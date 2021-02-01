@@ -34,7 +34,7 @@ def test_calculates_turbine_cost_including_margin_correctly():
         MockInflation(inflation), 
     )
 
-    cash_flow_step = CashFlowStep(not_date_of_financial_close, None, None, None, None, None, None, None)
+    cash_flow_step = CashFlowStep(not_date_of_financial_close, any_double, any_double, any_double, any_double, any_double, any_double, any_double)
 
     sut.calculate_step(cash_flow_step, fraction_of_spend)
 

@@ -2,6 +2,7 @@ from datetime import datetime
 from cash_flow_calculator.cash_flow_step import CashFlowStep
 from cash_flow_calculator.construction_margin_calculator_mockable_abstraction import ConstructionMarginCalculatorMockableAbstraction
 from tests.mock_inflation import MockInflation
+from tests.cash_flow_step_builder import CashFlowStepBuilder
 
 # Isolating the balance_of_plant_cost_including_margin value allows the test to 
 # concentrate just on that one value / calculation, which means that a lot less
@@ -71,15 +72,6 @@ class ConstructionMarginCashFlowCostCalculatorBuilder:
 
     def build(self):
         return self._sut
-
-
-class CashFlowStepBuilder:
-
-    def __init__(self): 
-        self._cash_flow_step = CashFlowStep(None, None, None, None, None, None, None, None)
-
-    def build(self):
-        return self._cash_flow_step
 
 
 # The code and test for the CashFlowStepsCalculator is no longer shown
