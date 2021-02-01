@@ -21,6 +21,10 @@ class ConstructionMarginCalculatorMockableAbstractionBuilder:
         self._sut.balance_of_plant_costs_at_financial_close = balance_of_plant_costs_at_financial_close
         return self
 
+    def with_turbine_costs(self, turbine_costs: float): 
+        self._sut.turbine_costs = turbine_costs
+        return self
+
     def with_inflation(self, inflation: float): 
         self._sut.inflation_calculator = MockInflation(inflation)
         return self
