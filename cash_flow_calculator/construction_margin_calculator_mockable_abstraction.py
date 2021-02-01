@@ -1,6 +1,5 @@
 from datetime import datetime
 from typing import List
-from dataclasses import dataclass
 from cash_flow_calculator.cash_flow_step import CashFlowStep
 
 # This class calculates a subset of properties on CashFlowSteps. In reality

@@ -1,6 +1,4 @@
 from datetime import datetime
-from typing import List
-from dataclasses import dataclass
 from cash_flow_calculator.cash_flow_step import CashFlowStep
 from cash_flow_calculator.construction_margin_calculator import ConstructionMarginCalculator
 

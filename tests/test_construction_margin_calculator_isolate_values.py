@@ -1,5 +1,3 @@
-from datetime import datetime
-from cash_flow_calculator.cash_flow_step import CashFlowStep
 from tests.construction_margin_calculator_mockable_abstraction_builder import ConstructionMarginCalculatorMockableAbstractionBuilder
 from tests.cash_flow_step_builder import CashFlowStepBuilder
 

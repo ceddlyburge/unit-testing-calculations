@@ -1,4 +1,3 @@
-from cash_flow_calculator.cash_flow_step import CashFlowStep
 from tests.construction_margin_calculator_blackboard_pattern_builder import ConstructionMarginCalculatorBlackboardPatternBuilder
 from tests.cash_flow_step_builder import CashFlowStepBuilder
 
