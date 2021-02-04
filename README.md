@@ -2,7 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/4k40ogfs5yv4rftf?svg=true)](https://ci.appveyor.com/project/ceddlyburge/unit-testing-calculations)
 
-This repository contains the example code for a blog post on unit testing complicated calculations.
+This repository contains the example code for a [blog post on unit testing complicated calculations](https://www.freecodecamp.org/news/how-to-test-complicated-calculations-new-refactoring/).
 
 It is good to make tests as descriptive as possible, to achieve [Tests as Documentation](http://xunitpatterns.com/Goals%20of%20Test%20Automation.html#Tests%20as%20Documentation). Including the calculations in the test is a big part of this, and avoids the [Hard Coded Test Data](http://xunitpatterns.com/Obscure%20Test.html#Hard-Coded%20Test%20Data) smell.
 
